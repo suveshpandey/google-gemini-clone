@@ -15,14 +15,13 @@ const Sidebar = ({extended, setExtended, isDarkMode}) => {
         setExtended(!extended);
     }
     return (
-        // <div className={`sm:h-[100vh] ${extended ? `w-[300px] h-[100vh] bg-slate-200 ` : `sm:w-[80px] sm:[100vh] h-[5vh] sm:bg-slate-200`} ${isDarkMode ? `bg-[#131314]  text-gray-200` : `bg-slate-200`} ${!extended && isDarkMode && `bg-[#131314]`, extended && isDarkMode && `bg-[#1f1f1f]`}  sm:grid sm:grid-rows-[60%_40%] justify-between sm:pt-5 pt-1  pb-5 sm:px-5 px-2 transition-all duration-300 z-10`}>
-        <div className={`${extended ? `sm:w-[350px] w-[300px] h-[100%]` : `sm:w-[80px] sm:h-[100vh] w-auto h-[5vh]`}  ${!isDarkMode && !extended && `sm:bg-slate-200 bg-transparent`} ${!isDarkMode && extended && `sm:bg-slate-200 bg-slate-200`} ${isDarkMode && !extended && `sm:bg-[#1f1f1f] bg-[#131314]`} ${isDarkMode && extended && `sm:bg-[#1f1f1f] bg-[#1f1f1f]`} h-[100vh] w-[300px] bg-slate-200 sm:grid sm:grid-rows-[60%_40%] hidden justify-between sm:pt-5 pt-1 pb-5 sm:px-5 px-2 transition-all duration-300 z-10 `}>
+        <div className={`${extended ? `sm:w-[350px] w-[300px] h-[100%]` : `sm:w-[80px] sm:h-[100vh] w-auto h-[5vh]`}  ${!isDarkMode && !extended && `sm:bg-slate-200 bg-transparent`} ${!isDarkMode && extended && `sm:bg-slate-200 bg-slate-200`} ${isDarkMode && !extended && `sm:bg-[#1f1f1f] bg-[#131314]`} ${isDarkMode && extended && `sm:bg-[#1f1f1f] bg-[#1f1f1f]`} h-[100vh] w-[300px] absolute sm:relative sm:grid-rows-[60%_40%] justify-between sm:pt-5 pt-1 pb-5 sm:px-5 px-2 transition-all duration-200 z-10 `}>
             <div className='flex flex-col h-[100%] '>
-                <button onClick={sidebarExtend} className={` w-[40px] p-2 rounded-full transition-colors duration-200 ${isDarkMode ? `hover:bg-[#252933]` : `hover:bg-slate-300`} `}><FiMenu className={`h-[25px] w-[25px] ${isDarkMode ? `text-slate-200` : `text-slate-700`}`} /></button>
-                <button onClick={newChat} className={`flex items-center justify-center  ${isDarkMode ? `bg-[#252933] text-gray-200` : `bg-gray-300 text-slate-600`} ${extended ? `block px-6` : `sm:block sm:pl-3 hidden`}  h-10 rounded-full  font-semibold mt-5 transition-all duration-300`}><FaPlus className={`${extended && `mr-4`}`} />{extended && "New Chat"}</button>
+                <button onClick={sidebarExtend} className={` w-[40px] p-2 sm:mt-0 mt-2 rounded-full transition-colors duration-200 ${isDarkMode ? `hover:bg-[#252933] ` : `hover:bg-slate-300`} `}><FiMenu className={`h-[25px] w-[25px] ${isDarkMode ? `text-slate-200` : `text-slate-700`}`} /></button>
+                <button onClick={newChat} className={`flex items-center justify-center  ${isDarkMode ? `bg-[#252933] text-gray-400` : `bg-gray-300 text-slate-600`} ${extended ? `block px-6` : `sm:block sm:pl-3 hidden`}  h-10 rounded-full  font-semibold mt-5 transition-all duration-300`}><FaPlus className={`${extended && `mr-4`}`} />{extended && "New Chat"}</button>
             
                 {extended && <div className='mt-10'>
-                    <p className={`text-lg font-semibold mb-2 ${isDarkMode ? `text-gray-200` : `text-gray-800`} `}>Recent</p>
+                    <p className={`text-lg font-semibold mb-2 pl-2 ${isDarkMode ? `text-gray-200` : `text-gray-800`} `}>Recent</p>
                     <div>
                         {previousPrompts.map((item, index)=>{
                             return(

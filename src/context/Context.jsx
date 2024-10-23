@@ -52,7 +52,6 @@ const ContextProvider = (props) => {
             }
         }
     
-        // Replace "*" with "</br>" for new lines
         let newResponse2 = newResponse.split("*").join("</br>");
     
         // Split the response into words and delay the display
@@ -66,7 +65,12 @@ const ContextProvider = (props) => {
         setInput("");  // Clear the input after sending
     };
     
-
+    function EnterKeyFn(event, prompt){
+        if(event.key === 'Enter'){
+            onSent(prompt)
+            console.log("Enter clicked...")
+        }
+    }
     
     const contextValue = {
         previousPrompts,
@@ -80,7 +84,8 @@ const ContextProvider = (props) => {
         setInput,
         question,
         setQuestion,
-        newChat
+        newChat,
+        EnterKeyFn
     }
 
     return (

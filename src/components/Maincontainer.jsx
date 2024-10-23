@@ -11,7 +11,7 @@ import { useContext } from 'react';
 
 const Maincontainer = ({extended, setExtended, isDarkMode}) => {
     
-    const {onSent, recentPrompt, showResult, loading, resultData, input, setInput, inputState, question, setQuestion} = useContext(Context)
+    const {onSent, recentPrompt, showResult, loading, resultData, input, setInput, inputState, question, setQuestion, EnterKeyFn} = useContext(Context)
     function searchCards(cardQuestion){
         onSent(cardQuestion)
     }
@@ -23,8 +23,8 @@ const Maincontainer = ({extended, setExtended, isDarkMode}) => {
                 <div id="input-section" className={`flex items-end pb-3 ${isDarkMode ? `bg-[#131314]` : `bg-white`} transition-all duration-200`}>
                     <div className='w-[100%] h-auto rounded-full flex flex-col items-center justify-center sm:mt-5 mt-2 '>
                         <div className='sm:w-[100%] w-[95%] h-[65px] rounded-full grid sm:grid-cols-[90%_10%] grid-cols-[80%_20%] items-end justify-center'>
-                            <input onChange={(e) => setInput(e.target.value)} value={input} type="text" placeholder='Ask Gemini' className={`h-[100%] w-[100%] ${isDarkMode ? `bg-[#1f1f1f] text-slate-200` : `bg-slate-200`}  rounded-l-full outline-none sm:pl-10 pl-6 pr-2 text-lg text-gray-700 `} />
-                            <button onClick={()=>onSent(input)} className={`flex items-center justify-center ${isDarkMode ? `bg-[#1f1f1f] text-slate-200 ` : `bg-slate-200`} h-[100%] w-[100%] rounded-r-full `}><VscSend  className={`w-[40px] h-[40px] rounded-full p-2 transition-colors duration-300 ${isDarkMode ? `hover:bg-[#292929]` : `hover:bg-slate-300`} `}/></button>
+                            <input onChange={(e) => setInput(e.target.value)} onKeyDown={(e)=>EnterKeyFn(e, input)} value={input} type="text" placeholder='Ask Gemini' className={`h-[100%] w-[100%] ${isDarkMode ? `bg-[#1f1f1f] text-slate-200` : `bg-slate-200`}  rounded-l-full outline-none sm:pl-10 pl-6 pr-2 text-lg text-gray-700 `} />
+                            <button onClick={()=>onSent(input)}  className={`flex items-center justify-center ${isDarkMode ? `bg-[#1f1f1f] text-slate-200 ` : `bg-slate-200`} h-[100%] w-[100%] rounded-r-full `}><VscSend  className={`w-[40px] h-[40px] rounded-full p-2 transition-colors duration-300 ${isDarkMode ? `hover:bg-[#292929]` : `hover:bg-slate-300`} `}/></button>
                         </div>
                         <p className={`text-center mt-5  text-sm ${isDarkMode ? `text-stone-300` : `text-slate-700`}`}>Gemini can make mistakes, so double-check it</p>
                     </div>

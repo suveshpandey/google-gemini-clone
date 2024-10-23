@@ -41,19 +41,19 @@ function Greetings({isDarkMode, searchCards}){
                         <p className='text-5xl sm:font-bold font-semibold text-slate-400 opacity-55 sm:mt-4 mt-1'>How can I help you today?</p>
                 </div>
                 <div id="cards" className="sm:w-[100%] w-[350px] px-5 gap-x-2 flex flex-row sm:justify-between mt-10 mx-auto overflow-x-auto overflow-hidden">
-                    <div onClick={() => searchCards("How is blockchain technology transforming data security and pravicy?")} className={`sm:w-[200px] min-w-[200px] h-[200px] cursor-pointer ${isDarkMode ? `bg-[#1f1f1f] text-slate-200` : `bg-slate-200`} opacity-90 p-3 rounded-md flex flex-col justify-between transition-all duration-200`}>
+                    <div onClick={() => searchCards("How is blockchain technology transforming data security and pravicy?")} className={`sm:w-[200px] min-w-[200px] h-[200px] cursor-pointer ${isDarkMode ? `bg-[#1f1f1f] text-slate-200 hover:bg-[#232323]` : `bg-slate-200 hover:bg-blue-100`} opacity-90 p-3 rounded-md flex flex-col justify-between transition-all duration-200`}>
                         <p>How is blockchain technology transforming data security and pravicy?</p>
                         <div className='flex justify-end'><IoGlobeOutline className='w-[30px] h-[30px]' /></div>
                     </div>
-                    <div onClick={() => searchCards("Write a letter to my landlord about a broken appliance")}  className={`sm:w-[200px] min-w-[200px] h-[200px] cursor-pointer ${isDarkMode ? `bg-[#1f1f1f] text-slate-200` : `bg-slate-200`} opacity-90 p-3 rounded-md flex flex-col justify-between transition-all duration-200`}>
+                    <div onClick={() => searchCards("Write a letter to my landlord about a broken appliance")}  className={`sm:w-[200px] min-w-[200px] h-[200px] cursor-pointer ${isDarkMode ? `bg-[#1f1f1f] text-slate-200 hover:bg-[#232323]` : `bg-slate-200 hover:bg-blue-100`} opacity-90 p-3 rounded-md flex flex-col justify-between transition-all duration-200`}>
                         <p>How can AI and Data Science be used to tackle real-world challenges, like climate change or healthcare?</p>
                         <div className='flex justify-end'><TbWriting className='w-[30px] h-[30px]' /></div>
                     </div>
-                    <div onClick={() => searchCards("Find flights and weather for an upcoming trip")}  className={`sm:w-[200px] min-w-[200px] h-[200px] cursor-pointer ${isDarkMode ? `bg-[#1f1f1f] text-slate-200` : `bg-slate-200`} opacity-90 p-3 rounded-md flex flex-col justify-between transition-all duration-200`}>
+                    <div onClick={() => searchCards("Find flights and weather for an upcoming trip")}  className={`sm:w-[200px] min-w-[200px] h-[200px] cursor-pointer ${isDarkMode ? `bg-[#1f1f1f] text-slate-200 hover:bg-[#232323]` : `bg-slate-200 hover:bg-blue-100`} opacity-90 p-3 rounded-md flex flex-col justify-between transition-all duration-200`}>
                         <p>Find flights and weather for an upcoming trip</p>
                         <div className='flex justify-end'><MdFlightTakeoff className='w-[30px] h-[30px]' /></div>
                     </div>
-                    <div onClick={() => searchCards("How can AI reshape global economies and next decade?")}  className={`sm:w-[200px] min-w-[200px] h-[200px] cursor-pointer ${isDarkMode ? `bg-[#1f1f1f] text-slate-200` : `bg-slate-200`} opacity-90 p-3 rounded-md flex flex-col justify-between transition-all duration-200`}>
+                    <div onClick={() => searchCards("How can AI reshape global economies and next decade?")}  className={`sm:w-[200px] min-w-[200px] h-[200px] cursor-pointer ${isDarkMode ? `bg-[#1f1f1f] text-slate-200 hover:bg-[#232323]` : `bg-slate-200 hover:bg-blue-100`} opacity-90 p-3 rounded-md flex flex-col justify-between transition-all duration-200`}>
                         <p>How can AI reshape global economies and next decade?</p>
                         <div className='flex justify-end'><TbBulb className='w-[30px] h-[30px]' /></div>
                     </div>

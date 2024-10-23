@@ -67,8 +67,7 @@ const ContextProvider = (props) => {
     
     function EnterKeyFn(event, prompt){
         if(event.key === 'Enter'){
-            onSent(prompt)
-            console.log("Enter clicked...")
+            onSent(prompt);
         }
     }
     

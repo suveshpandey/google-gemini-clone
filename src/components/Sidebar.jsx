@@ -39,7 +39,7 @@ const Sidebar = ({extended, setExtended, isDarkMode}) => {
 }
 function RecentChats({children, item, loadPrompt, isDarkMode}){
     return(
-        <div onClick={() => loadPrompt(item)} className={`flex items-center hover:bg-slate-300  transition-colors duration-200 w-[100%] rounded-full px-5 py-1 mb-2 cursor-pointer ${isDarkMode ? `text-gray-300` : `text-gray-800`} `}><FiMessageSquare className='mr-4' /><span className='mb-2'>{children}</span></div>
+        <div onClick={() => loadPrompt(item)} className={`flex items-center pt-2  transition-colors duration-200 w-[100%] rounded-full px-5 py-1 mb-2 cursor-pointer ${isDarkMode ? `text-gray-300 hover:bg-[#292929]` : `text-gray-800 hover:bg-slate-300`} `}><FiMessageSquare className='mr-4' /><span className='mb-1'>{children}</span></div>
     )
 }
 

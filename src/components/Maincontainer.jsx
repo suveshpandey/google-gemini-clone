@@ -9,7 +9,11 @@ import { VscSend } from "react-icons/vsc";
 import { Context } from '../context/Context'
 import { useContext } from 'react';
 
-const Maincontainer = ({extended, setExtended, isDarkMode}) => {
+import ReactMarkdown from 'react-markdown';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
+
+const Maincontainer = ({isDarkMode}) => {
     
     const {onSent, recentPrompt, showResult, loading, resultData, input, setInput, inputState, question, setQuestion, EnterKeyFn} = useContext(Context)
     function searchCards(cardQuestion){
@@ -36,11 +40,17 @@ function Greetings({isDarkMode, searchCards}){
     return(
         <>
             <div className='flex flex-col justify-center'>
+                {/* greetings and name */}
                 <div id="greet" className='w-[100%] py-10 sm:px-2 px-10 flex flex-col items-start '>
                         <p className='text-5xl sm:font-bold font-semibold bg-gradient-to-r from-blue-500 to-red-500 via-red-500 text-transparent bg-clip-text'>Hello, Suvesh</p>
                         <p className='text-5xl sm:font-bold font-semibold text-slate-400 opacity-55 sm:mt-4 mt-1'>How can I help you today?</p>
                 </div>
+                {/* cards */}
                 <div id="cards" className="sm:w-[100%] w-[350px] px-5 gap-x-2 flex flex-row sm:justify-between mt-10 mx-auto overflow-x-auto overflow-hidden">
+                    <div onClick={() => searchCards("Write a program to find factorial of a number using recursion, in c++, javascript, python, java.")}  className={`sm:w-[200px] min-w-[200px] h-[200px] cursor-pointer ${isDarkMode ? `bg-[#1f1f1f]  hover:bg-[#232323] text-slate-300` : `bg-slate-200 hover:bg-blue-100 text-gray-800`} opacity-90 p-3 rounded-md flex flex-col justify-between transition-all duration-200`}>
+                        <p>Write a program to find factorial of a number using recursion, in c++, javascript, python, java.</p>
+                        <div className='flex justify-end'><TbBulb className='w-[30px] h-[30px]' /></div>
+                    </div>
                     <div onClick={() => searchCards("How is blockchain technology transforming data security and pravicy?")} className={`sm:w-[200px] min-w-[200px] h-[200px] cursor-pointer ${isDarkMode ? `bg-[#1f1f1f]  hover:bg-[#232323] text-slate-300` : `bg-slate-200 hover:bg-blue-100 text-gray-800`} opacity-90 p-3 rounded-md flex flex-col justify-between transition-all duration-200`}>
                         <p>How is blockchain technology transforming data security and pravicy?</p>
                         <div className='flex justify-end'><IoGlobeOutline className='w-[30px] h-[30px]' /></div>
@@ -53,10 +63,7 @@ function Greetings({isDarkMode, searchCards}){
                         <p>Find flights and weather for an upcoming trip</p>
                         <div className='flex justify-end'><MdFlightTakeoff className='w-[30px] h-[30px]' /></div>
                     </div>
-                    <div onClick={() => searchCards("How can AI reshape global economies and next decade?")}  className={`sm:w-[200px] min-w-[200px] h-[200px] cursor-pointer ${isDarkMode ? `bg-[#1f1f1f]  hover:bg-[#232323] text-slate-300` : `bg-slate-200 hover:bg-blue-100 text-gray-800`} opacity-90 p-3 rounded-md flex flex-col justify-between transition-all duration-200`}>
-                        <p>How can AI reshape global economies and next decade?</p>
-                        <div className='flex justify-end'><TbBulb className='w-[30px] h-[30px]' /></div>
-                    </div>
+                    
                 </div>
             </div>
         </>
@@ -65,18 +72,48 @@ function Greetings({isDarkMode, searchCards}){
 function GetResult({question, resultData, loading, isDarkMode}){
     return (
         <div className='h-[100%] grid grid-rows-[6%_auto] py-5 sm:px-10 px-4 pr-7 '>
+
+            {/* userImg and question */}
             <div className='flex w-[100%]'>
                 <img className='rounded-full h-[30px] ' src="https://media.licdn.com/dms/image/v2/D4D03AQHO2aaVD-NAXA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1718271118163?e=1735171200&v=beta&t=0d98Q-8Si6hqbGk15RDvOz9o-L0UFWjaQOuvZ-dD--g" alt="" />
                 <h1 className={`ml-3  ${isDarkMode ? `text-gray-200` : `text-gray-700`} font-semibold `}>{question}</h1>
             </div>
+
+            {/* //result */}
             <div id='result-data' className=' w-[100%] h-[95%] overflow-y-auto grid grid-cols-[8%_auto] sm:mt-5' style={{overflowY: 'auto', scrollbarWidth: 'none'}}>
+                {/* gemini logo */}
                 <div>
                     <img className='rounded-full h-[30px] fixed ' src="https://www.gstatic.com/lamda/images/gemini_sparkle_red_4ed1cbfcbc6c9e84c31b987da73fc4168aec8445.svg" alt="" />
                 </div>
+                {/* main result */}
                 <div className='sm:mt-0 mt-10 sm:ml-0 ml-2'>
-                    {loading ? <Loading /> : <h1 className={`${isDarkMode ? `text-gray-200` : `text-gray-700`}`} dangerouslySetInnerHTML={{__html:resultData}}></h1>  }
+                    {loading ? <Loading /> : <ReactMarkdown
+                            className={`${isDarkMode ? `text-gray-200` : `text-gray-700`}`}
+                            children={resultData}
+                            components={{
+                                // This renders code blocks with syntax highlighting
+                                code({ node, inline, className, children, ...props }) {
+                                    const match = /language-(\w+)/.exec(className || '');
+                                    return !inline && match ? (
+                                        <SyntaxHighlighter
+                                            children={String(children).replace(/\n$/, '')}
+                                            style={vscDarkPlus}
+                                            language={match[1]}
+                                            PreTag="div"
+                                            {...props}
+                                        />
+                                    ) : (
+                                        <code className={className} {...props}>
+                                            {children}
+                                        </code>
+                                    );
+                                }
+                            }}
+                        />
+                    }
                 </div>
             </div>
+
         </div>
     )
 }
@@ -130,4 +167,4 @@ function Loading(){
         </ >
     )
 }
-export default Maincontainer
+export default Maincontainer;

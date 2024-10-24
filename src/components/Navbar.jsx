@@ -21,4 +21,4 @@ const Navbar = ({isDarkMode, setIsDarkMode}) => {
     )
 }
 
-export default Navbar
+export default Navbar;

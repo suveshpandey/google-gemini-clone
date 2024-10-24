@@ -40,4 +40,4 @@ function RecentChats({children, item, loadPrompt, isDarkMode}){
     )
 }
 
-export default Sidebar
+export default Sidebar;

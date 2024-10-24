@@ -22,7 +22,6 @@ const ContextProvider = (props) => {
         setLoading(false);
         setShowResult(false);
     }
-
     const onSent = async (prompt) => {
         setResultData("");
         setLoading(true);
@@ -39,38 +38,25 @@ const ContextProvider = (props) => {
         }
     
         const response = await run(usedPrompt);  // Await response from the run function
-    
-        let responseArray = response.split("**");
-        let newResponse = "";
-    
-        // Format the response with line breaks and bold text
-        for (let i = 0; i < responseArray.length; i++) {
-            if (i === 0 || i % 2 !== 1) {
-                newResponse += responseArray[i];
-            } else {
-                newResponse += "<br />" + "<b>" + responseArray[i] + "</b>";
-            }
-        }
-    
-        let newResponse2 = newResponse.split("*").join("</br>");
-    
-        // Split the response into words and delay the display
-        let newResponseArray = newResponse2.split(" ");
-        for (let i = 0; i < newResponseArray.length; i++) {
+
+        let formattedResponse =  `<div><strong>${usedPrompt}</strong></div><div>${response.replace(/\*\*/g, "<b>").replace(/\*\*/g, "</b>")}</div><hr />`;
+        setResultData(prev => prev + formattedResponse);
+        
+        let newResponseArray = response.split(" ");
+        for(let i = 0; i<newResponseArray.length; i++){
             const nextWord = newResponseArray[i];
             delayPara(i, nextWord + " ");
         }
+        setResultData(response);
     
         setLoading(false);
         setInput("");  // Clear the input after sending
-    };
-    
+    }
     function EnterKeyFn(event, prompt){
         if(event.key === 'Enter'){
             onSent(prompt);
         }
     }
-    
     const contextValue = {
         previousPrompts,
         setPreviousPrompts,

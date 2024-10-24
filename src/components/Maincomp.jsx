@@ -11,4 +11,4 @@ const Maincomp = ({extended, setExtended, isDarkMode, setIsDarkMode}) => {
     )
 }
 
-export default Maincomp
+export default Maincomp;

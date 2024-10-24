@@ -20,12 +20,16 @@ const Maincontainer = ({isDarkMode}) => {
         onSent(cardQuestion)
     }
     return (
-            <div className={`sm:w-[80%] w-[100%] 2xl:w-[65%] sm:h-[90vh] h-[95vh] grid sm:grid-rows-[75%_25%] grid-rows-[90%_10%] mx-auto`}>
+            <div className={`sm:w-[80%] w-[100%] 2xl:w-[65%] sm:h-[90vh] h-[95vh] grid sm:grid-rows-[80%_20%] grid-rows-[90%_10%] mx-auto`}>
+
+                {/* greetings-and-result-section */}
                 <div className={`h-[100%]`}>
                     {showResult ? <GetResult question={question} resultData={resultData} loading={loading} isDarkMode={isDarkMode} /> : <Greetings isDarkMode={isDarkMode} searchCards={searchCards} /> }
                 </div>
-                <div id="input-section" className={`flex items-end pb-3 ${isDarkMode ? `bg-[#131314]` : `bg-white`} transition-all duration-200`}>
-                    <div className='w-[100%] h-auto rounded-full flex flex-col items-center justify-center sm:mt-5 mt-2 '>
+
+                {/* input-section */}
+                <div id="input-section" className={`flex items-end sm:pb-3 pb-2 ${isDarkMode ? `bg-[#131314]` : `bg-white`} transition-all duration-200`}>
+                    <div className='w-[100%] h-auto rounded-full flex flex-col items-center justify-center mt-1 pt-2 '>
                         <div className='sm:w-[100%] w-[95%] h-[65px] rounded-full grid sm:grid-cols-[90%_10%] grid-cols-[80%_20%] items-end justify-center'>
                             <input onChange={(e) => setInput(e.target.value)} onKeyDown={(e)=>EnterKeyFn(e, input)} value={input} type="text" placeholder='Ask Gemini' className={`h-[100%] w-[100%] ${isDarkMode ? `bg-[#1f1f1f] text-slate-200` : `bg-slate-200`}  rounded-l-full outline-none sm:pl-10 pl-6 pr-2 text-lg text-gray-700 `} />
                             <button onClick={()=>onSent(input)}  className={`flex items-center justify-center ${isDarkMode ? `bg-[#1f1f1f] text-slate-200 ` : `bg-slate-200`} h-[100%] w-[100%] rounded-r-full `}><VscSend  className={`w-[40px] h-[40px] rounded-full p-2 transition-colors duration-300 ${isDarkMode ? `hover:bg-[#292929]` : `hover:bg-slate-300`} `}/></button>
@@ -71,22 +75,22 @@ function Greetings({isDarkMode, searchCards}){
 }
 function GetResult({question, resultData, loading, isDarkMode}){
     return (
-        <div className='h-[100%] grid grid-rows-[6%_auto] py-5 sm:px-10 px-4 pr-7 '>
+        <div className='h-[100%] grid grid-rows-[auto_auto] py-5 sm:px-10 px-4 pr-7 sm:overflow-y-auto 'style={{overflowY: 'auto', scrollbarWidth: 'none'}}>
 
             {/* userImg and question */}
-            <div className='flex w-[100%] sm:mb-0 mb-3'>
+            <div className='flex w-[100%] h-auto mb-1'>
                 <img className='rounded-full h-[30px] ' src="https://media.licdn.com/dms/image/v2/D4D03AQHO2aaVD-NAXA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1718271118163?e=1735171200&v=beta&t=0d98Q-8Si6hqbGk15RDvOz9o-L0UFWjaQOuvZ-dD--g" alt="" />
                 <h1 className={`ml-3  ${isDarkMode ? `text-gray-200` : `text-gray-700`} font-semibold `}>{question}</h1>
             </div>
 
             {/* //result */}
-            <div id='result-data' className=' w-[100%] h-[95%] overflow-y-auto grid grid-cols-[8%_auto] sm:mt-5 mt-6' style={{overflowY: 'auto', scrollbarWidth: 'none'}}>
+            <div id='result-data' className=' w-[100%] sm:h-auto h-[96%] grid grid-cols-[8%_auto] sm:mt-5 sm:overflow-scroll overflow-scroll' style={{scrollbarWidth: 'none'}} >
                 {/* gemini logo */}
                 <div>
-                    <img className='rounded-full h-[30px] fixed ' src="https://www.gstatic.com/lamda/images/gemini_sparkle_red_4ed1cbfcbc6c9e84c31b987da73fc4168aec8445.svg" alt="" />
+                    <img className='rounded-full h-[30px] ' src="https://www.gstatic.com/lamda/images/gemini_sparkle_red_4ed1cbfcbc6c9e84c31b987da73fc4168aec8445.svg" alt="" />
                 </div>
                 {/* main result */}
-                <div className='sm:mt-0 mt-10 sm:ml-0 ml-2 z-10'>
+                <div className='sm:mt-0 mt-10 sm:ml-0 ml-2'>
                     {loading ? <Loading /> : <ReactMarkdown
                             className={`${isDarkMode ? `text-gray-200` : `text-gray-700`}`}
                             children={resultData}

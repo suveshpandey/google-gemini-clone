@@ -74,19 +74,19 @@ function GetResult({question, resultData, loading, isDarkMode}){
         <div className='h-[100%] grid grid-rows-[6%_auto] py-5 sm:px-10 px-4 pr-7 '>
 
             {/* userImg and question */}
-            <div className='flex w-[100%]'>
+            <div className='flex w-[100%] sm:mb-0 mb-3'>
                 <img className='rounded-full h-[30px] ' src="https://media.licdn.com/dms/image/v2/D4D03AQHO2aaVD-NAXA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1718271118163?e=1735171200&v=beta&t=0d98Q-8Si6hqbGk15RDvOz9o-L0UFWjaQOuvZ-dD--g" alt="" />
                 <h1 className={`ml-3  ${isDarkMode ? `text-gray-200` : `text-gray-700`} font-semibold `}>{question}</h1>
             </div>
 
             {/* //result */}
-            <div id='result-data' className=' w-[100%] h-[95%] overflow-y-auto grid grid-cols-[8%_auto] sm:mt-5' style={{overflowY: 'auto', scrollbarWidth: 'none'}}>
+            <div id='result-data' className=' w-[100%] h-[95%] overflow-y-auto grid grid-cols-[8%_auto] sm:mt-5 mt-6' style={{overflowY: 'auto', scrollbarWidth: 'none'}}>
                 {/* gemini logo */}
                 <div>
                     <img className='rounded-full h-[30px] fixed ' src="https://www.gstatic.com/lamda/images/gemini_sparkle_red_4ed1cbfcbc6c9e84c31b987da73fc4168aec8445.svg" alt="" />
                 </div>
                 {/* main result */}
-                <div className='sm:mt-0 mt-10 sm:ml-0 ml-2'>
+                <div className='sm:mt-0 mt-10 sm:ml-0 ml-2 z-10'>
                     {loading ? <Loading /> : <ReactMarkdown
                             className={`${isDarkMode ? `text-gray-200` : `text-gray-700`}`}
                             children={resultData}

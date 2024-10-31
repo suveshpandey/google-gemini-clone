@@ -20,8 +20,8 @@ const Navbar = ({isDarkMode, setIsDarkMode}) => {
                     <div className='mr-3 sm:block hidden'><PiDotsNineBold className={`h-[25px] w-[25px] mr-2 ${isDarkMode ? `text-slate-200` : `text-slate-700`} `} /></div>
                     <div className='flex'>
                         <button onClick={changeTheme}  className='mr-3 sm:mr-6'>{isDarkMode ?  <MdSunny className='text-white size-6' /> : <MdDarkMode className='text-black size-6' /> }</button>
-                        <img onClick={changeUserInfoVisibility}  className='w-[33px] rounded-full justify-end cursor-pointer ' src="public/user-icon.png"  alt="" />
-                        {/* <FaUserCircle className='size-[30px] text-slate-400 ' /> */}
+                        {/* <img onClick={changeUserInfoVisibility}  className='w-[33px] rounded-full justify-end cursor-pointer ' src="public/user-icon.png"  alt="" /> */}
+                        <FaUserCircle onClick={changeUserInfoVisibility} className={`size-7 ${isDarkMode ? `text-slate-400` : `text-slate-300`} cursor-pointer `} />
                     </div>
                 </div>
             </div>

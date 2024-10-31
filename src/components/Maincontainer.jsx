@@ -6,6 +6,8 @@ import { MdFlightTakeoff } from "react-icons/md";
 import { TbBulb } from "react-icons/tb";
 import { VscSend } from "react-icons/vsc";
 import { GrStatusPlaceholderSmall } from "react-icons/gr";
+import { FaUserCircle } from "react-icons/fa";
+
 
 import { Context } from '../context/Context'
 import { useContext } from 'react';
@@ -76,16 +78,17 @@ function Greetings({isDarkMode, searchCards, currUsername}){
 }
 function GetResult({question, resultData, loading, isDarkMode}){
     return (
-        <div className='h-[100%] grid grid-rows-[auto_auto] py-5 sm:px-10 px-4 pr-7 sm:overflow-y-auto 'style={{overflowY: 'auto', scrollbarWidth: 'none'}}>
+        <div className='h-[100%] flex flex-col gap-y-3 py-5 sm:px-10 px-4 pr-7 sm:overflow-y-auto 'style={{overflowY: 'auto', scrollbarWidth: 'none'}}>
 
             {/* userImg and question */}
             <div className='flex w-[100%] h-auto mb-1'>
-                <img className='rounded-full h-[33px] ' src="public/user-icon.png" alt="" />
-                <h1 className={`ml-3 mt-1  ${isDarkMode ? `text-gray-200` : `text-gray-700`} font-semibold `}>{question}</h1>
+                {/* <img className='rounded-full h-[33px] ' src="public/user-icon.png" alt="" /> */}
+                <FaUserCircle className={`size-7 ${isDarkMode ? `text-slate-400` : `text-slate-300`}`} />
+                <h1 className={`ml-3 mt-0  ${isDarkMode ? `text-gray-200` : `text-gray-700`} font-semibold `}>{question}</h1>
             </div>
 
             {/* //result */}
-            <div id='result-data' className=' w-[100%] sm:h-auto h-[96%] grid grid-cols-[8%_auto] sm:mt-5 sm:overflow-scroll overflow-scroll' style={{scrollbarWidth: 'none'}} >
+            <div id='result-data' className=' w-[100%] sm:h-auto h-[96%]  grid grid-cols-[8%_auto] sm:mt-5 sm:overflow-scroll overflow-scroll' style={{scrollbarWidth: 'none'}} >
                 {/* gemini logo */}
                 <div>
                     <img className='rounded-full w-[30px] ' src="https://www.gstatic.com/lamda/images/gemini_sparkle_red_4ed1cbfcbc6c9e84c31b987da73fc4168aec8445.svg" alt="" />

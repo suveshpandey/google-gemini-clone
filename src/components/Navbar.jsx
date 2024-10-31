@@ -1,8 +1,10 @@
 import React, { useContext, useState } from 'react';
 import { PiDotsNineBold } from "react-icons/pi";
+import { Context } from '../context/Context';
+
 import { MdSunny } from "react-icons/md";
 import { MdDarkMode } from "react-icons/md";
-import { Context } from '../context/Context';
+import { FaUserCircle } from "react-icons/fa";
 
 const Navbar = ({isDarkMode, setIsDarkMode}) => {
     const {changeUserInfoVisibility} = useContext(Context);
@@ -19,6 +21,7 @@ const Navbar = ({isDarkMode, setIsDarkMode}) => {
                     <div className='flex'>
                         <button onClick={changeTheme}  className='mr-3 sm:mr-6'>{isDarkMode ?  <MdSunny className='text-white size-6' /> : <MdDarkMode className='text-black size-6' /> }</button>
                         <img onClick={changeUserInfoVisibility}  className='w-[33px] rounded-full justify-end cursor-pointer ' src="public/user-icon.png"  alt="" />
+                        {/* <FaUserCircle className='size-[30px] text-slate-400 ' /> */}
                     </div>
                 </div>
             </div>

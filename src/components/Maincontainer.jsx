@@ -78,13 +78,13 @@ function Greetings({isDarkMode, searchCards, currUsername}){
 }
 function GetResult({question, resultData, loading, isDarkMode}){
     return (
-        <div className='h-[100%] flex flex-col gap-y-3 py-5 sm:px-10 px-4 pr-7 sm:overflow-y-auto 'style={{overflowY: 'auto', scrollbarWidth: 'none'}}>
+        <div className='h-[100%] grid grid-rows-[auto_auto] py-5 sm:px-10 px-4 pr-7 sm:overflow-y-auto 'style={{overflowY: 'auto', scrollbarWidth: 'none'}}>
 
             {/* userImg and question */}
             <div className='flex w-[100%] h-auto mb-1'>
                 {/* <img className='rounded-full h-[33px] ' src="public/user-icon.png" alt="" /> */}
-                <FaUserCircle className={`size-7 ${isDarkMode ? `text-slate-400` : `text-slate-300`}`} />
-                <h1 className={`ml-3 mt-0  ${isDarkMode ? `text-gray-200` : `text-gray-700`} font-semibold `}>{question}</h1>
+                <div><FaUserCircle className={`sm:size-[30px] size-[27px] ${isDarkMode ? `text-slate-400` : `text-slate-300`}`} /></div>
+                <h1 className={`sm:ml-5 ml-3 sm:mt-1  ${isDarkMode ? `text-gray-200` : `text-gray-700`} font-semibold `}>{question}</h1>
             </div>
 
             {/* //result */}

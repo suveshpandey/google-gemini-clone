@@ -4,7 +4,7 @@ import run from "../config/gemini";
 export const Context = createContext();
 
 const ContextProvider = (props) => {
-    const URL = "http://localhost:3000/user";
+    const URL = "https://google-gemini-clone-backend.onrender.com/user";
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");

@@ -5,6 +5,7 @@ import { TbWriting } from "react-icons/tb";
 import { MdFlightTakeoff } from "react-icons/md";
 import { TbBulb } from "react-icons/tb";
 import { VscSend } from "react-icons/vsc";
+import { GrStatusPlaceholderSmall } from "react-icons/gr";
 
 import { Context } from '../context/Context'
 import { useContext } from 'react';
@@ -15,7 +16,7 @@ import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 const Maincontainer = ({isDarkMode}) => {
     
-    const {onSent, recentPrompt, showResult, loading, resultData, input, setInput, inputState, question, setQuestion, EnterKeyFn} = useContext(Context)
+    const {onSent, recentPrompt, showResult, loading, resultData, input, setInput, inputState, question, setQuestion, currUsername, EnterKeyFn} = useContext(Context)
     function searchCards(cardQuestion){
         onSent(cardQuestion)
     }
@@ -24,7 +25,7 @@ const Maincontainer = ({isDarkMode}) => {
 
                 {/* greetings-and-result-section */}
                 <div className={`h-[100%]`}>
-                    {showResult ? <GetResult question={question} resultData={resultData} loading={loading} isDarkMode={isDarkMode} /> : <Greetings isDarkMode={isDarkMode} searchCards={searchCards} /> }
+                    {showResult ? <GetResult question={question} resultData={resultData} loading={loading} isDarkMode={isDarkMode} /> : <Greetings isDarkMode={isDarkMode} searchCards={searchCards} currUsername={currUsername} /> }
                 </div>
 
                 {/* input-section */}
@@ -32,7 +33,7 @@ const Maincontainer = ({isDarkMode}) => {
                     <div className='w-[100%] h-auto rounded-full flex flex-col items-center justify-center mt-1 pt-2 '>
                         <div className='sm:w-[100%] w-[95%] h-[65px] rounded-full grid sm:grid-cols-[90%_10%] grid-cols-[80%_20%] items-end justify-center'>
                             <input onChange={(e) => setInput(e.target.value)} onKeyDown={(e)=>EnterKeyFn(e, input)} value={input} type="text" placeholder='Ask Gemini' className={`h-[100%] w-[100%] ${isDarkMode ? `bg-[#1f1f1f] text-slate-200` : `bg-slate-200`}  rounded-l-full outline-none sm:pl-10 pl-6 pr-2 text-lg text-gray-700 `} />
-                            <button onClick={()=>onSent(input)}  className={`flex items-center justify-center ${isDarkMode ? `bg-[#1f1f1f] text-slate-200 ` : `bg-slate-200`} h-[100%] w-[100%] rounded-r-full `}><VscSend  className={`w-[40px] h-[40px] rounded-full p-2 transition-colors duration-300 ${isDarkMode ? `hover:bg-[#292929]` : `hover:bg-slate-300`} `}/></button>
+                            <button onClick={()=>onSent(input)} disabled={loading} className={`flex items-center justify-center ${isDarkMode ? `bg-[#1f1f1f] text-slate-200 ` : `bg-slate-200`} h-[100%] w-[100%] rounded-r-full `}>{loading ?  <GrStatusPlaceholderSmall /> : <VscSend  className={`w-[40px] h-[40px] text-gray-600 rounded-full p-2 transition-colors duration-300 ${isDarkMode ? `hover:bg-[#292929]` : `hover:bg-slate-300`} `}/>}</button>
                         </div>
                         <p className={`text-center mt-5  text-sm ${isDarkMode ? `text-stone-300` : `text-slate-700`}`}>Gemini can make mistakes, so double-check it</p>
                     </div>
@@ -40,14 +41,14 @@ const Maincontainer = ({isDarkMode}) => {
             </div>
     )
 }
-function Greetings({isDarkMode, searchCards}){
+function Greetings({isDarkMode, searchCards, currUsername}){
     return(
         <>
             <div className='flex flex-col justify-center'>
                 {/* greetings and name */}
-                <div id="greet" className='w-[100%] py-10 sm:px-2 px-10 flex flex-col items-start '>
-                        <p className='text-5xl sm:font-bold font-semibold bg-gradient-to-r from-blue-500 to-red-500 via-red-500 text-transparent bg-clip-text'>Hello, Suvesh</p>
-                        <p className='text-5xl sm:font-bold font-semibold text-slate-400 opacity-55 sm:mt-4 mt-1'>How can I help you today?</p>
+                <div id="greet" className='w-[100%] py-10  sm:px-2 px-10 flex flex-col items-start '>
+                        <p className='text-5xl sm:font-bold font-semibold pb-2 bg-gradient-to-r from-blue-500 to-red-500 via-red-500 text-transparent bg-clip-text'>Hello {currUsername}</p>
+                        <p className='text-5xl sm:font-bold font-semibold text-slate-400 opacity-55 sm:mt-2 mt-1'>How can I help you today?</p>
                 </div>
                 {/* cards */}
                 <div id="cards" className="sm:w-[100%] w-[350px] px-5 gap-x-2 flex flex-row sm:justify-between mt-10 mx-auto overflow-x-auto overflow-hidden">
@@ -59,7 +60,7 @@ function Greetings({isDarkMode, searchCards}){
                         <p>How is blockchain technology transforming data security and pravicy?</p>
                         <div className='flex justify-end'><IoGlobeOutline className='w-[30px] h-[30px]' /></div>
                     </div>
-                    <div onClick={() => searchCards("Write a letter to my landlord about a broken appliance")}  className={`sm:w-[200px] min-w-[200px] h-[200px] cursor-pointer ${isDarkMode ? `bg-[#1f1f1f]  hover:bg-[#232323] text-slate-300` : `bg-slate-200 hover:bg-blue-100 text-gray-800`} opacity-90 p-3 rounded-md flex flex-col justify-between transition-all duration-200`}>
+                    <div onClick={() => searchCards("How can AI and Data Science be used to tackle real-world challenges, like climate change or healthcare?")}  className={`sm:w-[200px] min-w-[200px] h-[200px] cursor-pointer ${isDarkMode ? `bg-[#1f1f1f]  hover:bg-[#232323] text-slate-300` : `bg-slate-200 hover:bg-blue-100 text-gray-800`} opacity-90 p-3 rounded-md flex flex-col justify-between transition-all duration-200`}>
                         <p>How can AI and Data Science be used to tackle real-world challenges, like climate change or healthcare?</p>
                         <div className='flex justify-end'><TbWriting className='w-[30px] h-[30px]' /></div>
                     </div>
@@ -79,15 +80,15 @@ function GetResult({question, resultData, loading, isDarkMode}){
 
             {/* userImg and question */}
             <div className='flex w-[100%] h-auto mb-1'>
-                <img className='rounded-full h-[30px] ' src="https://media.licdn.com/dms/image/v2/D4D03AQHO2aaVD-NAXA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1718271118163?e=1735171200&v=beta&t=0d98Q-8Si6hqbGk15RDvOz9o-L0UFWjaQOuvZ-dD--g" alt="" />
-                <h1 className={`ml-3  ${isDarkMode ? `text-gray-200` : `text-gray-700`} font-semibold `}>{question}</h1>
+                <img className='rounded-full h-[33px] ' src="public/user-icon.png" alt="" />
+                <h1 className={`ml-3 mt-1  ${isDarkMode ? `text-gray-200` : `text-gray-700`} font-semibold `}>{question}</h1>
             </div>
 
             {/* //result */}
             <div id='result-data' className=' w-[100%] sm:h-auto h-[96%] grid grid-cols-[8%_auto] sm:mt-5 sm:overflow-scroll overflow-scroll' style={{scrollbarWidth: 'none'}} >
                 {/* gemini logo */}
                 <div>
-                    <img className='rounded-full h-[30px] ' src="https://www.gstatic.com/lamda/images/gemini_sparkle_red_4ed1cbfcbc6c9e84c31b987da73fc4168aec8445.svg" alt="" />
+                    <img className='rounded-full w-[30px] ' src="https://www.gstatic.com/lamda/images/gemini_sparkle_red_4ed1cbfcbc6c9e84c31b987da73fc4168aec8445.svg" alt="" />
                 </div>
                 {/* main result */}
                 <div className='sm:mt-0 mt-10 sm:ml-0 ml-2'>
@@ -122,7 +123,6 @@ function GetResult({question, resultData, loading, isDarkMode}){
     )
 }
 function Loading(){
-
     return(
         <>
             <style>
@@ -140,12 +140,12 @@ function Loading(){
             <div className='loader w-[100%] flex flex-col gap-2 '>
                 <div className='loader w-[100%] flex flex-col gap-2'>
                 <hr 
-                    className='rounded-md border-none bg-sky-300' 
+                    className='rounded-md border-none bg-sky-400' 
                     style={{
                         height: '18px',
                         backgroundSize: '700px 50px',
                         animation: 'loader 3s infinite linear',
-                        backgroundImage: 'linear-gradient(to right, #9ed7ff, #ffffff, #9ed7ff)',
+                        backgroundImage: 'linear-gradient(to right, #58b4f5, #e6cfcf, #58b4f5)',
                     }} 
                 />
                 <hr 
@@ -154,7 +154,7 @@ function Loading(){
                         height: '18px',
                         backgroundSize: '700px 50px',
                         animation: 'loader 3s infinite linear',
-                        backgroundImage: 'linear-gradient(to right, #9ed7ff, #ffffff, #9ed7ff)',
+                        backgroundImage: 'linear-gradient(to right, #58b4f5, #e6cfcf, #58b4f5)',
                     }} 
                 />
                 <hr 
@@ -163,7 +163,7 @@ function Loading(){
                         height: '18px',
                         backgroundSize: '700px 50px',
                         animation: 'loader 3s infinite linear',
-                        backgroundImage: 'linear-gradient(to right, #9ed7ff, #ffffff, #9ed7ff)',
+                        backgroundImage: 'linear-gradient(to right, #58b4f5, #e6cfcf, #58b4f5)',
                     }} 
                 />
             </div>
